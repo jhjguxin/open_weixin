@@ -22,6 +22,7 @@ module OpenWeixin
       def get_token(code, params={}, opts={})
         params = {:redirect_uri => @client.redirect_uri}.merge(params)
         params = {'grant_type' => 'authorization_code', 'code' => code}.merge(client_params).merge(params)
+
         @client.get_token(params, opts)
         #super(code, params, opts)
       end

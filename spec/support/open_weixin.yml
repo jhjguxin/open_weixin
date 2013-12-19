@@ -1,9 +1,8 @@
 defaults: &defaults
   app_id: "12341432134"
   app_secret: "app_secret"
-  redirect_uri: "http://weixin.guanxi.me"
-  url: "http://weixin.guanxi.me/callback"
-  token: "guanxi"
+  redirect_uri: "http://www.example.com/callback"
+
 
 development:
   <<: *defaults

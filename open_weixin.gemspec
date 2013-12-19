@@ -24,4 +24,11 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler", "~> 1.3"
   spec.add_development_dependency 'rspec'
   spec.add_development_dependency "rake"
+  spec.add_development_dependency "debugger"
+  # Code coverage for Ruby 1.9+ with a powerful configuration library and automatic merging of coverage across test suites
+  spec.add_development_dependency 'simplecov'
+  # WebMock allows stubbing HTTP requests and setting expectations on HTTP requests.
+  spec.add_development_dependency 'webmock'
+  # A Ruby implementation of the Coveralls API.
+  spec.add_development_dependency "coveralls"
 end

@@ -2,7 +2,7 @@
 module OpenWeixin
   module Interface
 
-    # Users API
+    # Snsapi API
     #
     # @see http://open.weibo.com/wiki/API%E6%96%87%E6%A1%A3_V2#.E7.94.A8.E6.88.B7
     class Snsapi < Base
