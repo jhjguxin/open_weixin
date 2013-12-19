@@ -19,52 +19,52 @@ OpenWeixin::Config.redirect_uri = "http://www.example.com/callback"
 
 Ok, now you are ready to enjoy it. OpenWeixin has provided several ways to get your access token, and you can easily get it using OpenWeixin.
 
-1. The Authorization Code strategy with response_type set to code
+1.  The Authorization Code strategy with response_type set to code
 
-```ruby
-# get authorize_url
-client = OpenWeixin::Client.new
-client.auth_code.authorize_url
-# => "https://api.weibo.com/oauth2/authorize?response_type=code&client_id=1234567890&redirect_uri=http%3A%2F%2Fwww.example.com%2fcallback"
+  ```ruby
+  # get authorize_url
+  client = OpenWeixin::Client.new
+  client.auth_code.authorize_url
+  # => "https://api.weibo.com/oauth2/authorize?response_type=code&client_id=1234567890&redirect_uri=http%3A%2F%2Fwww.example.com%2fcallback"
+  
+  # get token using authorization_code
+  # OpenWeixin::Client.from_code is a shortcut for client.auth_code.get_token("authorization_code_value")
+  client = OpenWeixin::Client.from_code("authorization_code_value")
+  ```
 
-# get token using authorization_code
-# OpenWeixin::Client.from_code is a shortcut for client.auth_code.get_token("authorization_code_value")
-client = OpenWeixin::Client.from_code("authorization_code_value")
-```
+2.  The Authorization Code strategy with response_type set to token
 
-2. The Authorization Code strategy with response_type set to token
+  ```ruby
+  # get authorize_url with response_type set to token
+  client = Weibo::Client.new
+  client.auth_code.authorize_url(:response_type => "token")
+  # => "https://api.weibo.com/oauth2/authorize?response_type=token&client_id=1234567890&redirect_uri=http%3A%2F%2Fwww.example.com%2fcallback"
+  
+  # get token from callback hash like this /callback#access_token=6874dd3766b35536abcb76a9e3a57867&expires_in=86400
+  client = OpenWeixin::Client.from_hash(:access_token => "6874dd3766b35536abcb76a9e3a57867", :expires_in => 86400)
+  ```
 
-```ruby
-# get authorize_url with response_type set to token
-client = Weibo::Client.new
-client.auth_code.authorize_url(:response_type => "token")
-# => "https://api.weibo.com/oauth2/authorize?response_type=token&client_id=1234567890&redirect_uri=http%3A%2F%2Fwww.example.com%2fcallback"
+3.  Refresh your token
 
-# get token from callback hash like this /callback#access_token=6874dd3766b35536abcb76a9e3a57867&expires_in=86400
-client = OpenWeixin::Client.from_hash(:access_token => "6874dd3766b35536abcb76a9e3a57867", :expires_in => 86400)
-```
+  Note that you could refresh your token only when you can get the refresh_token.
 
-3. Refresh your token
+  ```ruby
+  client.refresh!
+  ```
 
-Note that you could refresh your token only when you can get the refresh_token.
+  You can check if you are authorized by
+  
+  ```ruby
+  client.is_authorized?
+  # => true
+  ```
 
-```ruby
-client.refresh!
-```
+4.  fetch userinfo
 
-You can check if you are authorized by
-
-```ruby
-client.is_authorized?
-# => true
-```
-
-4. fetch userinfo
-
-```ruby
-client = OpenWeixin::Client.from_hash(:access_token => "ACCESS_TOKEN", :expires_in => 7200)
-client.snsapi.userinfo
-```
+  ```ruby
+  client = OpenWeixin::Client.from_hash(:access_token => "ACCESS_TOKEN", :expires_in => 7200)
+  client.snsapi.userinfo
+  ```
 
 ### API
 
